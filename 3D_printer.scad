@@ -1,164 +1,170 @@
-//difference(){
-//cube([700,700,12.7], center=true);
-//	
-//	//holes for leveling legs
-//	translate([-350,-350,-1]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([350,350,-1]) 
-//      cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([350,-350,-1]) 
-//      cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([-350,350,-1]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	
-//	//mounting holes
-//	translate([-285,-285,-1]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([285,285,-1]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([-285,285,-1]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([285,-285,-1]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);	
-//
-//	//inlay for panels
-//	translate([-350+6.35/2,0,101.6/2 ])
-//		cube([6.35+1,600+1,101.6], center=true);
-//	translate([350-6.35/2,0,101.6/2 ])
-//		cube([6.35+1,600+1,101.6], center=true);
-//}
-//
-//
-//
-/////////////////////////////////////
-//
-////circles at each corner
-//difference(){
-//   translate([-350,-350]) 
-//	cylinder(r=50, h=12.7, center=true);
-//    translate([-350,-350,-1]) 
-//      cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//}
-//
-//difference(){
-//   translate([350,350]) 
-//	cylinder(r=50, h=12.7, center=true);
-//   translate([350,350,-1]) 
-//   cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//}
-//
-//difference(){
-//   translate([350,-350]) 
-//	cylinder(r=50, h=12.7, center=true);
-//   translate([350,-350,-1]) 
-//      cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//}
-//
-//difference(){
-//   translate([-350,350]) 
-//	cylinder(r=50, h=12.7, center=true);
-//   translate([-350,350,-1]) 
-//      cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//}
-//
-//
-///////////////////////////////
-//
-//
-//difference(){
-//	translate([0,0,101.6])
-//		cube([700,700,12.7], center=true);
-//
-////mountng holes
-//	translate([-285,-285,100]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([285,285,100]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([-285,285,100]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([285,-285,100]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);	
-//
-////concave corners
-//	translate([-350,-350,100]) 
-//		cylinder(r=50, h=20, center=true);
-//	translate([350,350,100]) 
-//		cylinder(r=50, h=20, center=true);
-//	translate([-350,350,100]) 
-//		cylinder(r=50, h=20, center=true);
-//	translate([350,-350,100]) 
-//		cylinder(r=50, h=20, center=true);
-//
-//	//inlay for panels
-//	translate([350-6.35/2,0,101.6/2 ])
-//		cube([6.35+1,600+1,101.6], center=true);
-//	translate([-350+6.35/2,0,101.6/2 ])
-//		cube([6.35+1,600+1,101.6], center=true);
-//}
-//
-//////////////////////////////////
-//
-//
-////rods
-//	translate([-285,-285,333.7]) 
-//   	cylinder(r=10,h=700, center=true, $fn=100);
-//	translate([285,285,333.7]) 
-//   	cylinder(r=10,h=700, center=true, $fn=100);
-//	translate([-285,285,333.7]) 
-//   	cylinder(r=10,h=700, center=true, $fn=100);
-//	translate([285,-285,333.7]) 
-//   	cylinder(r=10,h=700, center=true, $fn=100);
-//
+difference(){
+cube([700,700,12.7], center=true);
+	
+	//holes for leveling legs
+	translate([-350,-350,-1]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([350,350,-1]) 
+      cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([350,-350,-1]) 
+      cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([-350,350,-1]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	
+	//mounting holes
+	translate([-285,-285,-1]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([285,285,-1]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([-285,285,-1]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([285,-285,-1]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);	
+
+	//inlay for panels
+	translate([-350+6.35/2,0,101.6/2 ])
+		cube([6.35+1,600+1,101.6], center=true);
+	translate([350-6.35/2,0,101.6/2 ])
+		cube([6.35+1,600+1,101.6], center=true);
+}
+
+
+
 ///////////////////////////////////
-//
-//
-////top plate
-//difference(){
-//	
-//	translate([0,0,101.6+570])
-//		cube([700,700,12.7], center=true);
-//
-////mountng holes
-//	translate([-285,-285,101.6+570]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([285,285,101.6+570]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([-285,285,101.6+570]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
-//	translate([285,-285,101.6+570]) 
-//   	cylinder(r=10,h=12.7+10, center=true, $fn=100);	
-//
-////concave corners
-//	translate([-350,-350,101.6+570]) 
-//		cylinder(r=50, h=20, center=true);
-//	translate([350,350,101.6+570]) 
-//		cylinder(r=50, h=20, center=true);
-//	translate([-350,350,101.6+570]) 
-//		cylinder(r=50, h=20, center=true);
-//	translate([350,-350,101.6+570]) 
-//		cylinder(r=50, h=20, center=true);
-//
-////logo
-//	
-//	translate([100,-185,101.6+570+4.5],center=true)
-//	rotate([0,0,90])
-//	resize([400,0,0], auto=true)
-//		dxf_linear_extrude(file="project_zen_logo.dxf", height=8);
-//
-//
-//
-//
-//	
-//}
+
+//circles at each corner
+difference(){
+   translate([-350,-350]) 
+	cylinder(r=50, h=12.7, center=true);
+    translate([-350,-350,-1]) 
+      cylinder(r=10,h=12.7+10, center=true, $fn=100);
+}
+
+difference(){
+   translate([350,350]) 
+	cylinder(r=50, h=12.7, center=true);
+   translate([350,350,-1]) 
+   cylinder(r=10,h=12.7+10, center=true, $fn=100);
+}
+
+difference(){
+   translate([350,-350]) 
+	cylinder(r=50, h=12.7, center=true);
+   translate([350,-350,-1]) 
+      cylinder(r=10,h=12.7+10, center=true, $fn=100);
+}
+
+difference(){
+   translate([-350,350]) 
+	cylinder(r=50, h=12.7, center=true);
+   translate([-350,350,-1]) 
+      cylinder(r=10,h=12.7+10, center=true, $fn=100);
+}
+
+
 /////////////////////////////
-//
-//
-////translate([-285,-285,50])
-////	cube([35,35,10], center=true);
-//
-////////////////////////////
-//
-////panels
+
+
+difference(){
+	translate([0,0,101.6])
+		cube([700,700,12.7], center=true);
+
+//mountng holes
+	translate([-285,-285,100]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([285,285,100]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([-285,285,100]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([285,-285,100]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);	
+
+//concave corners
+	translate([-350,-350,100]) 
+		cylinder(r=50, h=20, center=true);
+	translate([350,350,100]) 
+		cylinder(r=50, h=20, center=true);
+	translate([-350,350,100]) 
+		cylinder(r=50, h=20, center=true);
+	translate([350,-350,100]) 
+		cylinder(r=50, h=20, center=true);
+
+	//inlay for panels
+	translate([350-6.35/2,0,101.6/2 ])
+		cube([6.35+1,600+1,101.6], center=true);
+	translate([-350+6.35/2,0,101.6/2 ])
+		cube([6.35+1,600+1,101.6], center=true);
+
+//slots
+	translate([0,-310,101.6-1])
+		cube([350,15,20], center=true);
+	translate([0,310,101.6-1])
+		cube([350,15,20], center=true);
+}
+
+////////////////////////////////
+
+
+//rods
+	translate([-285,-285,333.7]) 
+   	cylinder(r=10,h=700, center=true, $fn=100);
+	translate([285,285,333.7]) 
+   	cylinder(r=10,h=700, center=true, $fn=100);
+	translate([-285,285,333.7]) 
+   	cylinder(r=10,h=700, center=true, $fn=100);
+	translate([285,-285,333.7]) 
+   	cylinder(r=10,h=700, center=true, $fn=100);
+
+/////////////////////////////////
+
+
+//top plate
+difference(){
+	
+	translate([0,0,101.6+570])
+		cube([700,700,12.7], center=true);
+
+//mountng holes
+	translate([-285,-285,101.6+570]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([285,285,101.6+570]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([-285,285,101.6+570]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);
+	translate([285,-285,101.6+570]) 
+   	cylinder(r=10,h=12.7+10, center=true, $fn=100);	
+
+//concave corners
+	translate([-350,-350,101.6+570]) 
+		cylinder(r=50, h=20, center=true);
+	translate([350,350,101.6+570]) 
+		cylinder(r=50, h=20, center=true);
+	translate([-350,350,101.6+570]) 
+		cylinder(r=50, h=20, center=true);
+	translate([350,-350,101.6+570]) 
+		cylinder(r=50, h=20, center=true);
+
+//logo
+	
+	translate([100,-185,101.6+570+4.5],center=true)
+	rotate([0,0,90])
+	resize([400,0,0], auto=true)
+		dxf_linear_extrude(file="project_zen_logo.dxf", height=8);
+
+
+
+
+	
+}
+///////////////////////////
+
+
+//translate([-285,-285,50])
+//	cube([35,35,10], center=true);
+
+//////////////////////////
+
+//panels
 	
 difference(){
 	translate([-350+6.35/2,0,101.6/2 ])
@@ -167,10 +173,29 @@ difference(){
 //power switch cut out
 	translate([-350-2,225,65], center=true)
 		cube([10,28,21]);
+
+//usb cut out #1
+	translate([-350-2,-235,101.6/2+25], center=true)
+		cube([10,15,8]);
+
+//usb cut out #2
+	translate([-350-2,-235,101.6/2], center=true)
+		cube([10,15,8]);
+
+//usb cut out #3
+	translate([-350-2,-235,101.6/2-25], center=true)
+		cube([10,15,8]);
+
 }
 
+difference(){	
 	translate([350-6.35/2,0,101.6/2 ])
 		cube([6.35,600,101.6], center=true);
+
+//usb cut out #4
+	translate([350-10,-235,101.6/2 ], center=true)
+		cube([20,15,8]);
+}
 //power receptacle cut out
 
 	
