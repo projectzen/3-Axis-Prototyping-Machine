@@ -1,3 +1,5 @@
+use <switch_mount.scad>
+
 difference(){
 cube([700,700,12.7], center=true);
 	
@@ -186,7 +188,31 @@ difference(){
 	translate([-350-2,-235,101.6/2-25], center=true)
 		cube([10,15,8]);
 
+//ethernet cut out
+	translate([-350-2,-35,101.6/2-10], center=true)
+		cube([10,22,22]);
+
+
+//hdmi cut out
+	translate([-350-2,-135,101.6/2], center=true)
+		cube([10,17.5,8]);
+
 }
+
+translate([-350,-135,101.6/2+6], center=true)
+rotate([45,0,0])
+	cube([6.35,10,10]);
+
+translate([-350+6.35,-135+17.5,101.6/2+6], center=true)
+rotate([45,0,180])
+	cube([6.35,10,10]);
+
+
+
+translate([350+6.35/2,125,90], center=true)
+emergency_switch_mount();
+
+
 
 difference(){	
 	translate([350-6.35/2,0,101.6/2 ])
