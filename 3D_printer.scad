@@ -1,4 +1,5 @@
 use <switch_mount.scad>
+use <button_mount_assembled.scad>
 
 /////////////////////
 //DEFINED VARIABLES//
@@ -270,13 +271,24 @@ difference(){
 	translate([feetCoordinates-thickness/2,0,panelHeight/2 ])
 		cube([thickness,600,panelHeight], center=true);
 
+//buttonmount cutout
+	translate([393+10,175,60+25])
+		button_mount_assembled();
+
 //usb cut out #4
 	translate([feetCoordinates-10,-235,panelHeight/2 ], center=true)
 		cube([20,15,8]);
+}	
 }
-	translate([feetCoordinates+thickness/2,125,90], center=true)
-		emergency_switch_mount();
+
+difference(){
+	translate([393,175,0])
+		button_mount_assembled();
+
+	translate([0,0,-100])
+		cube([1000,1000,100]);
 }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
 	
