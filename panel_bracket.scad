@@ -30,7 +30,7 @@ translate([285,270,0])
 cube([50,30,20]);
 
 translate([285,285,-50]) 
-cylinder(r=9.525, h=100);
+cylinder(r=9.525/2, h=100);
 
 
 
@@ -39,7 +39,7 @@ difference(){
 mount();
 
 translate([285,285,-50]) 
-cylinder(r=9.525, h=100);
+cylinder(r=9.525/2, h=100);
 
 }
 
@@ -85,31 +85,3 @@ test3();
 translate([-285,-285,0])
 test5();
 
-//difference({
-//
-//
-//
-//
-//translate([220,310,345])
-//test();
-//}
-//9.525
-
-
-//
-//
-//module abc(){
-//rotate([0,60,0])
-//translate([-100,240,-100])
-//cube([20,60,80]);
-//}
-
-
-//
-//difference(){
-//translate([422,5,0])
-//abc();
-//
-//
-//
-//}
