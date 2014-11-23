@@ -30,7 +30,7 @@ translate([285,270,0])
 cube([50,30,20]);
 
 translate([285,285,-50]) 
-cylinder(r=9.525/2, h=100);
+cylinder(r=6.00/2, h=100);
 
 
 
@@ -39,7 +39,7 @@ difference(){
 mount();
 
 translate([285,285,-50]) 
-cylinder(r=9.525/2, h=100);
+cylinder(r=6.00/2, h=100);
 
 }
 

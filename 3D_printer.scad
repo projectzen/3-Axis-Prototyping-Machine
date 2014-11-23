@@ -12,7 +12,7 @@ thickness=6.35;
 panelHeight=101.6;
 
 //rod radius
-rodRadius=9.525 / 2;
+rodRadius=6.00 / 2;
 
 //leveling feet radius
 feetRadius=10;
