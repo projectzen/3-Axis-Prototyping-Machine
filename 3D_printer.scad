@@ -29,7 +29,7 @@ feetCoordinates=350;
 //length and width
 footPrint=700;
 ///////////////////////////////////////////////////////////////////////////////////////
-topPlatform();
+//topPlatform();
 
 middlePlatform();
 
@@ -39,7 +39,7 @@ frontPanel();
 
 backPanel();
 
-threadedRods();
+//threadedRods();
 ///////////////////////////////////////////////////////////////////////////////////////
 module bottomPlatform(){
 
@@ -247,13 +247,27 @@ difference(){
 		cube([10,15,8]);
 
 //ethernet cut out
-	translate([-feetCoordinates-2,-35,panelHeight/2-10], center=true)
-		cube([10,22,22]);
+	translate([-feetCoordinates-2,-35,panelHeight/2-5], center=true)
+		cube([10,16.5,13.5]);
 
+//ethernet panel mount holes
+		rj45Hole();
 
 //hdmi cut out
 	translate([-feetCoordinates-2,-135,panelHeight/2], center=true)
 		cube([10,17.5,8]);
+
+//hdmi panel mount holes
+		hdmiHole();
+
+//usb panel mount holes
+		usbHoles();
+
+	translate([0,0,25])
+		usbHoles();
+
+	translate([0,0,-25])
+		usbHoles();
 }
 
 	translate([-feetCoordinates,-135,panelHeight/2+6], center=true)
@@ -278,11 +292,14 @@ difference(){
 //usb cut out #4
 	translate([feetCoordinates-10,-235,panelHeight/2 ], center=true)
 		cube([20,15,8]);
+
+translate([700,0,0])
+		usbHoles();
 }	
 }
 
 difference(){
-	translate([393,175,0])
+	translate([393+1,175,0])
 		button_mount_assembled();
 
 	translate([0,0,-100])
@@ -291,8 +308,38 @@ difference(){
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
+module usbHole(){
 	
+	rotate([0,90,0])	
+		cylinder(r=1.5, h=100, $fn=100);
+}
 
+	module usbHoles(){
+	rotate([0,0,0])
+	translate([-400,-235+15/2+29/2,panelHeight/2+4], center=true)
+		usbHole();
 
+	rotate([0,0,0])
+	translate([-400,-235+15/2-29/2,panelHeight/2+4], center=true)
+		usbHole();
+}
+///////////////////////////////////////////////////////////////////////////////////////
 
+module hdmiHole(){
+	
+	translate([-400,-135+17.5/2+15,panelHeight/2+4], center=true)
+		usbHole();
 
+	translate([-400,-135+17.5/2-15,panelHeight/2+4], center=true)
+		usbHole();
+}
+///////////////////////////////////////////////////////////////////////////////////////
+
+module rj45Hole(){;
+	translate([-400,-35+8.25-13.5,panelHeight/2+2.5], center=true)
+		usbHole();
+
+	translate([-400,-35+8.25+13.5,panelHeight/2+2.5], center=true)
+		usbHole();
+}
+///////////////////////////////////////////////////////////////////////////////////////
