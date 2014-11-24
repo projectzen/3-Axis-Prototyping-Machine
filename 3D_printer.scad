@@ -1,5 +1,8 @@
 use <switch_mount.scad>
 use <button_mount_assembled.scad>
+use <keypad_mount_assembled.scad>
+use <panel_bracket.scad>
+use <leveling_feet.scad>
 
 /////////////////////
 //DEFINED VARIABLES//
@@ -15,7 +18,7 @@ panelHeight=101.6;
 rodRadius=6.00 / 2;
 
 //leveling feet radius
-feetRadius=10;
+feetRadius=4.5;
 
 //outer radius of circular corners
 circleRadius=50;
@@ -40,6 +43,10 @@ frontPanel();
 backPanel();
 
 //threadedRods();
+
+topBrackets();
+
+bottomBrackets();
 ///////////////////////////////////////////////////////////////////////////////////////
 module bottomPlatform(){
 
@@ -268,6 +275,17 @@ difference(){
 
 	translate([0,0,-25])
 		usbHoles();
+	
+	bracketHoles();
+
+	translate([0,-285*2,0])
+		bracketHoles();
+
+	translate([0,-285*2,54])
+		bracketHoles();
+
+	translate([0,0,54])
+		bracketHoles();
 }
 
 	translate([-feetCoordinates,-135,panelHeight/2+6], center=true)
@@ -285,27 +303,46 @@ difference(){
 	translate([feetCoordinates-thickness/2,0,panelHeight/2 ])
 		cube([thickness,600,panelHeight], center=true);
 
-//buttonmount cutout
-	translate([393+10,175,60+25])
+//button mount cutout
+	translate([393+10,175,25])
 		button_mount_assembled();
+
+//keypad mount cutout
+	translate([393+10,175-135,25])
+		keypad_mount_assembled();
 
 //usb cut out #4
 	translate([feetCoordinates-10,-235,panelHeight/2 ], center=true)
 		cube([20,15,8]);
 
-translate([700,0,0])
+	translate([700,0,0])
 		usbHoles();
+
+	translate([325,175-135,40])
+		panelHole();
+
+	translate([325,175,40])
+	
+		panelHole();
+	
+		bracketHoles();
+
+	translate([0,-285*2,0])
+		bracketHoles();
+
+	translate([0,-285*2,54])
+		bracketHoles();
+
+	translate([0,0,54])
+		bracketHoles();
 }	
 }
 
-difference(){
+	translate([393+1,175-135,0])
+		keypad_mount_assembled();
+
 	translate([393+1,175,0])
 		button_mount_assembled();
-
-	translate([0,0,-100])
-		cube([1000,1000,100]);
-}
-
 ///////////////////////////////////////////////////////////////////////////////////////
 
 module usbHole(){
@@ -343,3 +380,63 @@ module rj45Hole(){;
 		usbHole();
 }
 ///////////////////////////////////////////////////////////////////////////////////////
+
+module panelHole(){;
+	
+	rotate([0,90,0])
+		cylinder(r=10, h=50, $fn=100);
+}
+///////////////////////////////////////////////////////////////////////////////////////
+module bottomBrackets(){
+
+	translate([285,285,6])
+		panelBracket();
+
+	translate([285,-285,6])
+		panelBracket();
+
+	rotate([0,0,180])
+	translate([285,-285,6])
+		panelBracket();
+
+	rotate([0,0,180])
+	translate([285,285,6])
+		panelBracket();
+}
+
+module topBrackets(){
+	
+	rotate([180,0,0])
+	translate([0,0,-panelHeight])
+		bottomBrackets();
+}
+///////////////////////////////////////////////////////////////////////////////////////
+
+module bracketHole(){
+
+	rotate([0,90,0])
+	cylinder(r=3, h=1000, $fn=100);
+}
+
+module bracketHoles(){
+	
+	translate([-500,285,25+6])
+		bracketHole();
+
+	translate([-500,285,10+6])
+		bracketHole();
+}
+///////////////////////////////////////////////////////////////////////////////////////
+
+	translate([feetCoordinates,feetCoordinates,-30])
+		levelingFeet();
+
+	translate([-feetCoordinates,-feetCoordinates,-30])
+		levelingFeet();
+
+	translate([-feetCoordinates,feetCoordinates,-30])
+		levelingFeet();
+
+	translate([feetCoordinates,-feetCoordinates,-30])
+		levelingFeet();
+

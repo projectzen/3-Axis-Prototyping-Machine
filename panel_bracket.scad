@@ -1,4 +1,4 @@
-
+module panelBracket(){
 
 module test5(){
 
@@ -30,7 +30,7 @@ translate([285,270,0])
 cube([50,30,20]);
 
 translate([285,285,-50]) 
-cylinder(r=6.00/2, h=100);
+cylinder(r=6.00/2, h=100, $fn=100);
 
 
 
@@ -39,14 +39,14 @@ difference(){
 mount();
 
 translate([285,285,-50]) 
-cylinder(r=6.00/2, h=100);
+cylinder(r=6.00/2, h=100, $fn=100);
 
 }
 
 module test(){
 rotate([90,90,0])
 translate([285,90,0]) 
-cylinder(r=40, h=100);
+cylinder(r=40, h=100, $fn=100);
 }
 
 
@@ -68,7 +68,7 @@ test4();
 module test3(){
 rotate([0,90,0])
 translate([0,0,0])
-cylinder(r=3, h=20);
+cylinder(r=3, h=20, $fn=100);
 }
 
 module test4(){
@@ -85,3 +85,6 @@ test3();
 translate([-285,-285,0])
 test5();
 
+}
+
+panelBracket();

@@ -23,8 +23,8 @@ difference(){
 	translate([-50,-50,0], center=true)
 		cube([100,100,6.35]);
 	
-	translate([0,0,-6.35], center=true)
-		cylinder(r=22, h=20);
+	translate([-1,0,0])
+		cube([67.5,67.5,200], center=true);
 	
 	translate([50-6.35,-50-1,-1], center=true)
 		cube([100,100+2,6.35+2]);
