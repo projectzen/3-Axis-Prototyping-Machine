@@ -3,6 +3,7 @@ use <button_mount_assembled.scad>
 use <keypad_mount_assembled.scad>
 use <panel_bracket.scad>
 use <leveling_feet.scad>
+use <power_receptacle.scad>
 
 /////////////////////
 //DEFINED VARIABLES//
@@ -34,19 +35,31 @@ footPrint=700;
 ///////////////////////////////////////////////////////////////////////////////////////
 //topPlatform();
 
+color("PaleGreen", a=1.0){
 middlePlatform();
+}
 
+color("Plum", a=1.0){
 bottomPlatform();
+}
 
+color("SkyBlue", a=1.0){
 frontPanel();
+}
 
+color("LightCoral", a=1.0){
 backPanel();
+}
 
 //threadedRods();
 
+color("NavajoWhite", a=1.0){
 topBrackets();
+}
 
+color("NavajoWhite", a=1.0){
 bottomBrackets();
+}
 ///////////////////////////////////////////////////////////////////////////////////////
 module bottomPlatform(){
 
@@ -286,6 +299,21 @@ difference(){
 
 	translate([0,0,54])
 		bracketHoles();
+
+	translate([-375,225,20])
+		powerReceptacle();
+
+translate([-400,225+14+20,38-9])
+usbHole();
+
+	translate([-400,225+14-20,38-9])
+usbHole();
+
+translate([0,0,-15])
+fanHoles();
+
+translate([0,2.5,1])
+fan();	
 }
 
 	translate([-feetCoordinates,-135,panelHeight/2+6], center=true)
@@ -427,7 +455,7 @@ module bracketHoles(){
 		bracketHole();
 }
 ///////////////////////////////////////////////////////////////////////////////////////
-
+color("Orange", a=1.0){
 	translate([feetCoordinates,feetCoordinates,-30])
 		levelingFeet();
 
@@ -439,4 +467,38 @@ module bracketHoles(){
 
 	translate([feetCoordinates,-feetCoordinates,-30])
 		levelingFeet();
+}
+///////////////////////////////////////////////////////////////////////////////////////
+module fanHoles(){
+translate([-400,100,30])
+usbHole();
 
+translate([-400,100+71,30])
+usbHole();
+
+translate([-400,100,30+71])
+usbHole();
+
+translate([-400,100+71,30+71])
+usbHole();
+}
+
+module fan(){
+	translate([-380,155,30-11])
+		cube ([50,5,60]);
+
+	translate([-380,145,30-11])
+		cube ([50,5,60]);
+
+	translate([-380,135,30-11])
+		cube ([50,5,60]);
+
+	translate([-380,125,30-11])
+		cube ([50,5,60]);
+
+	translate([-380,115,30-11])
+		cube ([50,5,60]);
+
+	translate([-380,105,30-11])
+		cube ([50,5,60]);
+}
