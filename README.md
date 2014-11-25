@@ -36,9 +36,10 @@ Current Progress
 ===============
 We are currently working on schematics and planning. In regards to the control system, we have:
 
-* Set up the Beaglebone Black with Machinekit, which provides LinuxCNC
+* Set up the Beaglebone Black with Machinekit, a varient of LinuxCNC
+* Successfully communicated with the Arduino Mega from the Beaglebone via serial
 * Soldered the motor controller boards. Image: ![Controller board](http://afuhrtrumpet.github.io/images/controllerboards.jpg "Controller Board")
-* Installed grbl on the Arduino
+* Installed grbl on the Arduino Mega
 * 3D printed some parts for use in the base
 * Ordered and received all electronics necessary to complete the project
 
