@@ -45,13 +45,13 @@ We are currently working on schematics and planning. In regards to the control s
 
 Timeline
 ===============
-Nov 25 - Nov 30 : Finalize CAD renderings and submit undergraduate research proposal
-Dec 1 - Dec 7 : order acrylic and meet with mechanical engineer 
-Dec 8 - Dec 31 : Fabricate and assemble base
-Jan 1 - Jan 11 : Purchase domain and create website
-Jan 12 - Jan 18 : First week of spring semester classes (nothing planned)
-Jan 19 - Jan 25 : Site is live | Purchase extruder and all other necessary components (pending funding)
-Jan 26 - Feb 1 : work on documentation
-Feb 2 - Feb 15 : finish assembly and calibrate
-Feb 16 - Mar 1: Finish project documentation 
-Mar - Apr : implement leapmotion support 
+* Nov 25 - Nov 30 : Finalize CAD renderings and submit undergraduate research proposal
+* Dec 1 - Dec 7 : order acrylic and meet with mechanical engineer
+* Dec 8 - Dec 31 : Fabricate and assemble base
+* Jan 1 - Jan 11 : Purchase domain and create website
+* Jan 12 - Jan 18 : First week of spring semester classes (nothing planned)
+* Jan 19 - Jan 25 : Site is live | Purchase extruder and all other necessary components (pending funding)
+* Jan 26 - Feb 1 : work on documentation
+* Feb 2 - Feb 15 : finish assembly and calibrate
+* Feb 16 - Mar 1: Finish project documentation 
+* Mar - Apr : implement leapmotion support 
