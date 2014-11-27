@@ -31,7 +31,7 @@ We also plan to share our design and method to the broader community for educati
 
 Plan
 ====
-For our control system, we are using grbl on an Arduino Mega, which will receive G-code from a Beaglebone black that is intended to serve as the primary workstation with LinuxCNC. The Arduino in this case will drive 4 stepper motors, two for the X axis control, and one each for the other two axes. The body of the project will be housed in a laser-cut acrylic frame, and all wires and extensions will be panel mounted so that the machine is entirely housed within its frame. We will be implementing both software and hardware failsafe reductancies to lessen the chance of mechanical failure.
+For our control system, we are using [Grbl](https://github.com/LETARTARE/Grbl-xx_with_Arduino "Grbl") on an Arduino Mega, which will receive G-code from a Beaglebone black that is intended to serve as the primary workstation with LinuxCNC. The Arduino in this case will drive 4 stepper motors, two for the X axis control, and one each for the other two axes. The body of the project will be housed in a laser-cut acrylic frame, and all wires and extensions will be panel mounted so that the machine is entirely housed within its frame. We will be implementing both software and hardware failsafe reductancies to lessen the chance of mechanical failure.
 
 Current Progress
 ===============
