@@ -39,7 +39,7 @@ We are currently working on schematics and planning. In regards to the control s
 
 * Set up and configured the Beaglebone Black with Machinekit, a varient of LinuxCNC
 * Successfully communicated with the Arduino Mega from the Beaglebone via serial
-* Started the design of the electrical system (Located on Upverter [Upverter](https://upverter.com/projectzen/))
+* Started the design of the electrical system (Located on [Upverter](https://upverter.com/projectzen/ "Upverter"))
 * Soldered the motor controller boards. Image: ![Controller board](http://afuhrtrumpet.github.io/images/controllerboards.jpg "Controller Board")
 * Installed grbl on the Arduino Mega
 * 3D printed some parts for use in the base
