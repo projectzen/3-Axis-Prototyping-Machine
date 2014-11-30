@@ -14,6 +14,7 @@ In short, it's a modular, 3-axis control system meant for doing just about anyth
 * Signature replicator
 * Vinyl record fabricator
 * Braille writer
+* Pumpkin carver
 
 ...and many more. If you have any suggestions for other ideas, please contact us--we'd love to hear them! We also plan on being backwards compatible with our original project from the OSU hackathon of a robotic zen garden: https://github.com/OHIOhackathon2014/Project_Zen 
 
