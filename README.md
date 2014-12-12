@@ -42,9 +42,10 @@ We are currently working on schematics and planning. In regards to the control s
 * Successfully communicated with the Arduino Mega from the Beaglebone via serial
 * Started the design of the electrical system (Located on [Upverter](https://upverter.com/projectzen/ "Upverter"))
 * Soldered the motor controller boards. Image: ![Controller board](http://afuhrtrumpet.github.io/images/controllerboards.jpg "Controller Board")
-* Installed grbl on the Arduino Mega
+* Installed Grbl on the Arduino Mega
 * 3D printed some parts for use in the base
 * Ordered and received all electronics necessary to complete the project
+* Added external power to usb hub
 
 
 Timeline
