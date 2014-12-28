@@ -1,6 +1,6 @@
-Project Zen 3D Printer/3-axis control system
+Welcome
 ==========
-In this repository are the CAD files for the 3D printer/3-axis control system built by Project Zen, a group of four students at The Ohio State University dedicated to advancing the hardware hacking community at and beyond the university. We are big advocates of Open Source hardware and software. Our majors include Electrical Engineering, Computer Science & Engineering and Electrical & Computer Engineering.
+In this repository are the CAD files for the 3-Axis Prototyping Machine built and designed by Project Zen, a group of four students at The Ohio State University dedicated to advancing the hardware hacking community at and beyond the university. We are huge advocates of Open Source hardware and software. Our majors include Electrical Engineering, Computer Science & Engineering and Electrical & Computer Engineering.
 
 What is it?
 ===========
