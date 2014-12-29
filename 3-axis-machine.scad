@@ -644,6 +644,14 @@ translate([middlePlatform_X/2-thickness-1,200,panelHeight/2 ], center=true)
 rotate([0,0,-90])
 import("20x4_lcd.stl");
 
+translate([0-50,0,250])
+rotate([90,0,0])
+import("pico.stl");
+
+translate([0-50,0-3,250-8.5])
+rotate([90,0,0])
+import("pico_nozzle.stl");
+
 
 
 
