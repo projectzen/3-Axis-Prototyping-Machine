@@ -313,6 +313,13 @@ difference(){
 	translate([393+10,175-135,25])
 		keypad_mount_assembled();
 
+translate([middlePlatform_X/2-thickness-1,200,panelHeight/2 ], center=true)
+rotate([0,0,-90])
+import("20x4_lcd.stl");
+
+translate([middlePlatform_X/2-thickness-1,200-40,panelHeight/2-15 ], center=true)
+cube([50,80,30]);
+
 //usb cut out #4
 	translate([middlePlatform_X/2-thickness-1,-235,panelHeight/2 ], center=true)
 		cube([thickness*2+1,15,8]);
@@ -632,6 +639,10 @@ import("acme_end_cap.stl");
 
 translate([-middlePlatform_X/12,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50,12.7/2])
 import("acme_end_cap.stl");
+
+translate([middlePlatform_X/2-thickness-1,200,panelHeight/2 ], center=true)
+rotate([0,0,-90])
+import("20x4_lcd.stl");
 
 
 
