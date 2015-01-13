@@ -663,5 +663,25 @@ rotate([90,0,0])
 import("pico_nozzle.stl");
 
 
+translate([-middlePlatform_X/12-35+20,0,200+90-30])
+rotate([90,0,0])
+cylinder(r=4, h=650, $fn=50, center=true);
+
+translate([-middlePlatform_X/12-35+20
+,0,200+90+30])
+rotate([90,0,0])
+cylinder(r=4, h=650, $fn=50, center=true);
 
 
+translate([-middlePlatform_X/12-35+20,0,200+90-30])
+rotate([0,90,-90])
+import("8mm_linear_bearing.stl");
+
+
+translate([-middlePlatform_X/12-35+20,0,200+90+30])
+rotate([0,90,-90])
+import("8mm_linear_bearing.stl");
+
+
+
+cylinder(r=40.64/2, h=, $fn=50, center=true);
