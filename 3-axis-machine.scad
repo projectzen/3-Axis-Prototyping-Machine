@@ -684,4 +684,4 @@ import("8mm_linear_bearing.stl");
 
 
 
-cylinder(r=40.64/2, h=, $fn=50, center=true);
+cylinder(r=40.64/2, h=20, $fn=50, center=true);
