@@ -46,6 +46,7 @@ feetCoordinates_X=middlePlatform_X/2-feetOffset;
 feetCoordinates_Y=450-feetOffset;
 //leveling feet radius
 feetRadius=4.5;
+feetHoleOffset=0.5;
 
 middlePlatform_Y=600+thickness*4;
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -97,20 +98,20 @@ difference(){
 			}
 	
 	//holes for leveling legs//
-	translate([-feetCoordinates,-feetCoordinates,-1]) 
-   		cylinder(r=feetRadius,h=12.7+10, center=true, $fn=100);
+	translate([-feetCoordinates_X,-feetCoordinates_Y,0]) 
+   		cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
 	
-	translate([feetCoordinates,feetCoordinates,-1]) 
-      	cylinder(r=feetRadius,h=12.7+10, center=true, $fn=100);
+	translate([feetCoordinates_X,feetCoordinates_Y,0]) 
+      	cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
 	
-	translate([feetCoordinates,-feetCoordinates,-1]) 
-      	cylinder(r=feetRadius,h=12.7+10, center=true, $fn=100);
+	translate([feetCoordinates_X,-feetCoordinates_Y,0]) 
+      	cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
 	
-	translate([-feetCoordinates,feetCoordinates,-1]) 
-   		cylinder(r=feetRadius,h=12.7+10, center=true, $fn=100);
+	translate([-feetCoordinates_X,feetCoordinates_Y,0]) 
+   		cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
 	
 	//mounting holes
-	translate([-feetCoordinates,-feetCoordinates,-1]) 
+	translate([-feetCoordinates,-feetCoordinates,0]) 
    		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
 	
 	translate([feetCoordinates,feetCoordinates,-1]) 
