@@ -41,6 +41,9 @@ bottomPlatform_Y=900;
 //length and width
 middlePlatform_X=1000;
 
+//Radius of rounded edges
+platformOffset=15;
+
 feetCoordinates=middlePlatform_X/2;
 
 middlePlatform_Y=600+thickness*4;
@@ -87,7 +90,10 @@ zMotors();
 module bottomPlatform(){
 
 difference(){
-	cube([middlePlatform_X,bottomPlatform_Y,12.7], center=true);
+	minkowski() {
+ 				cube([middlePlatform_X-platformOffset,bottomPlatform_Y-platformOffset,12.7], center=true);
+ 				cylinder(r=platformOffset,h=12.7);
+			}
 	
 	//holes for leveling legs//
 	translate([-feetCoordinates,-feetCoordinates,-1]) 
@@ -191,7 +197,11 @@ module topPlatform(){
 difference(){
 	
 	translate([0,0,panelHeight+570])
-		cube([middlePlatform_X,bottomPlatform_Y,12.7], center=true);
+			minkowski() {
+ 				cube([middlePlatform_X-platformOffset,bottomPlatform_Y-platformOffset,12.7], center=true);
+ 				cylinder(r=platformOffset,h=12.7);
+			}
+			
 
 ////mountng holes
 //	translate([-feetCoordinates,-feetCoordinates,panelHeight+570]) 
