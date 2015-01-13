@@ -20,8 +20,6 @@ panelHeight=101.6;
 //rod radius
 rodRadius=12.7 / 2;
 
-//leveling feet radius
-feetRadius=4.5;
 
 //outer radius of circular corners
 circleRadius=50;
@@ -31,7 +29,6 @@ rodCoordinates=420;
 
 //cartesian plane coordinates where the leveling feet mount/pass through
 
-feetCoordinates_Y=450;
 
 bottomPlatform_Y=900;
 
@@ -44,7 +41,11 @@ middlePlatform_X=1000;
 //Radius of rounded edges
 platformOffset=15;
 
-feetCoordinates=middlePlatform_X/2;
+feetOffset=15;
+feetCoordinates_X=middlePlatform_X/2-feetOffset;
+feetCoordinates_Y=450-feetOffset;
+//leveling feet radius
+feetRadius=4.5;
 
 middlePlatform_Y=600+thickness*4;
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -147,7 +148,7 @@ difference(){
 	translate([0,0,panelHeight])
 		cube([middlePlatform_X,middlePlatform_Y,12.7], center=true);
 
-//mountng holes
+//mounting holes
 	translate([-feetCoordinates,-feetCoordinates,100]) 
    		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
 	
@@ -460,16 +461,16 @@ module bracketHoles(){
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 color("Silver", a=1.0){
-	translate([feetCoordinates,feetCoordinates_Y,-30])
+	translate([feetCoordinates_X,feetCoordinates_Y,-30])
 		levelingFeet();
 
-	translate([-feetCoordinates,-feetCoordinates_Y,-30])
+	translate([-feetCoordinates_X,-feetCoordinates_Y,-30])
 		levelingFeet();
 
-	translate([-feetCoordinates,feetCoordinates_Y,-30])
+	translate([-feetCoordinates_X,feetCoordinates_Y,-30])
 		levelingFeet();
 
-	translate([feetCoordinates,-feetCoordinates_Y,-30])
+	translate([feetCoordinates_X,-feetCoordinates_Y,-30])
 		levelingFeet();
 }
 ///////////////////////////////////////////////////////////////////////////////////////
