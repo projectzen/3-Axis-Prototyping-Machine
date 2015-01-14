@@ -37,7 +37,6 @@ bottomPlatform_Y=900;
 
 
 
-
 //length and width
 middlePlatform_X=1000;
 
@@ -86,6 +85,17 @@ translate([0,0,665])
 rotate([180,0,0])
 
 zMotors();
+
+
+translate([6-70,22,70])
+rotate([0,0,-90])
+printHead();
+
+translate([-70,0,70])
+extruder();
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////
 module bottomPlatform(){
 
@@ -654,34 +664,75 @@ translate([middlePlatform_X/2-thickness-1,200,panelHeight/2 ], center=true)
 rotate([0,0,-90])
 import("20x4_lcd.stl");
 
-translate([0-50,0,250])
+
+
+translate([-middlePlatform_X/12-35+20,0,200+90-40])
+rotate([90,0,0])
+cylinder(r=4, h=650, $fn=50, center=true);
+
+translate([-middlePlatform_X/12-35+20,0,200+90+40])
+rotate([90,0,0])
+cylinder(r=4, h=650, $fn=50, center=true);
+
+
+translate([-middlePlatform_X/12-35+20,0,200+90-40])
+rotate([0,90,-90])
+import("8mm_linear_bearing.stl");
+
+
+translate([-middlePlatform_X/12-35+20,0,200+90+40])
+rotate([0,90,-90])
+import("8mm_linear_bearing.stl");
+
+
+
+module printHead(){
+
+
+
+
+
+translate([0,0,250-125])
 rotate([90,0,0])
 import("pico.stl");
 
-translate([0-50,0-3,250-8.5])
+translate([0,0-3,250-8.5-125])
 rotate([90,0,0])
 import("pico_nozzle.stl");
 
 
-translate([-middlePlatform_X/12-35+20,0,200+90-30])
-rotate([90,0,0])
-cylinder(r=4, h=650, $fn=50, center=true);
 
-translate([-middlePlatform_X/12-35+20
-,0,200+90+30])
-rotate([90,0,0])
-cylinder(r=4, h=650, $fn=50, center=true);
+picoFan();
 
+module picoFan(){
 
-translate([-middlePlatform_X/12-35+20,0,200+90-30])
-rotate([0,90,-90])
-import("8mm_linear_bearing.stl");
+translate([8,23,148])
+rotate([180,0,90])
+import("40mmpicofan.stl");
 
+translate([8,17,148])
+rotate([180,0,90])
+import("bolt_on_clip.stl");
 
-translate([-middlePlatform_X/12-35+20,0,200+90+30])
-rotate([0,90,-90])
-import("8mm_linear_bearing.stl");
+}
 
 
 
-cylinder(r=40.64/2, h=20, $fn=50, center=true);
+
+}
+
+
+module extruder(){
+
+translate([0,5,200])
+rotate([0,-90,180])
+import("extruder.stl");
+
+
+translate([-30,0,220])
+rotate([0,90,0])
+nema17();
+}
+
+
+
