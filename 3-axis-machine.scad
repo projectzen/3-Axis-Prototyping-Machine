@@ -6,6 +6,7 @@ use <leveling_feet.scad>
 use <power_receptacle.scad>
 use <nema17.scad>
 use <threads.scad>
+use <topPlatform.scad>
 
 /////////////////////
 //DEFINED VARIABLES//
@@ -25,7 +26,7 @@ rodRadius=12.7 / 2;
 circleRadius=50;
 
 //cartesian plane coordinates where the threaded rods pass through
-rodCoordinates=420;
+rodOffset=420;
 
 //cartesian plane coordinates where the leveling feet mount/pass through
 
@@ -52,7 +53,8 @@ middlePlatform_Y=600+thickness*4;
 ///////////////////////////////////////////////////////////////////////////////////////
 
 color("Gainsboro"){
-topPlatform();
+translate ([0,0,panelHeight+570])
+	topPlatform(middlePlatform_X,bottomPlatform_Y,platformOffset);
 }
 
 color("GhostWhite", a=100.0){
@@ -60,7 +62,7 @@ middlePlatform();
 }
 
 color("Gainsboro", a=1.0){
-bottomPlatform();
+bottomPlatform(middlePlatform_X,bottomPlatform_Y,platformOffset,feetCoordinates_X,feetCoordinates_Y,feetRadius, thickness, middlePlatform_Y, rodOffset, rodRadius, panelHeight);
 }
 
 color("GhostWhite", a=1.0){
@@ -89,59 +91,6 @@ rotate([180,0,0])
 
 zMotors();
 ///////////////////////////////////////////////////////////////////////////////////////
-module bottomPlatform(){
-
-difference(){
-	minkowski() {
- 				cube([middlePlatform_X-platformOffset,bottomPlatform_Y-platformOffset,12.7], center=true);
- 				cylinder(r=platformOffset,h=12.7);
-			}
-	
-	//holes for leveling legs//
-	translate([-feetCoordinates_X,-feetCoordinates_Y,0]) 
-   		cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
-	
-	translate([feetCoordinates_X,feetCoordinates_Y,0]) 
-      	cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
-	
-	translate([feetCoordinates_X,-feetCoordinates_Y,0]) 
-      	cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
-	
-	translate([-feetCoordinates_X,feetCoordinates_Y,0]) 
-   		cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
-	
-	//mounting holes
-	translate([-feetCoordinates,-feetCoordinates,0]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
-	
-	translate([feetCoordinates,feetCoordinates,-1]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
-	
-	translate([-feetCoordinates,feetCoordinates,-1]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
-	
-	translate([feetCoordinates,-feetCoordinates,-1]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);	
-
-	//inlay for panels
-	translate([-feetCoordinates+thickness/2,0,panelHeight/2 ])
-		cube([thickness+1,middlePlatform_Y-thickness*2+1,panelHeight], center=true);
-	
-	translate([feetCoordinates-thickness/2,0,panelHeight/2 ])
-		cube([thickness+1,middlePlatform_Y+1,panelHeight], center=true);
-	
-	threadedRods();
-
-sidePanel_right();
-sidePanel_left();
-
-
-
-
-}
-
-
-}
 ///////////////////////////////////////////////////////////////////////////////////////
 module middlePlatform(){
 
@@ -181,54 +130,19 @@ sidePanel_left();
 ///////////////////////////////////////////////////////////////////////////////////////
 module threadedRods(){
 //rods
-	translate([-rodCoordinates,-rodCoordinates+25,333.7]) 
+	translate([-rodOffset,-rodOffset+25,333.7]) 
    		cylinder(r=rodRadius,h=700, center=true, $fn=100);
 	
-	translate([rodCoordinates,rodCoordinates-25,333.7]) 
+	translate([rodOffset,rodOffset-25,333.7]) 
    		cylinder(r=rodRadius,h=700, center=true, $fn=100);
 	
-	translate([-rodCoordinates,rodCoordinates-25,333.7]) 
+	translate([-rodOffset,rodOffset-25,333.7]) 
    		cylinder(r=rodRadius,h=700, center=true, $fn=100);
 	
-	translate([rodCoordinates,-rodCoordinates+25,333.7]) 
+	translate([rodOffset,-rodOffset+25,333.7]) 
    		cylinder(r=rodRadius,h=700, center=true, $fn=100);
 }
 ///////////////////////////////////////////////////////////////////////////////////////
-module topPlatform(){
-
-difference(){
-	
-	translate([0,0,panelHeight+570])
-			minkowski() {
- 				cube([middlePlatform_X-platformOffset,bottomPlatform_Y-platformOffset,12.7], center=true);
- 				cylinder(r=platformOffset,h=12.7);
-			}
-			
-
-////mountng holes
-//	translate([-feetCoordinates,-feetCoordinates,panelHeight+570]) 
-//   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
-//	
-//	translate([feetCoordinates,feetCoordinates,panelHeight+570]) 
-//   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
-//	
-//	translate([-feetCoordinates,feetCoordinates,panelHeight+570]) 
-//   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
-//	
-//	translate([feetCoordinates,-feetCoordinates,panelHeight+570]) 
-//   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);	
-//
-//
-//
-//	threadedRods();
-
-//logo
-	translate([100,-185,panelHeight+570+4.5],center=true)
-	rotate([0,0,90])
-	resize([400,0,0], auto=true)
-		dxf_linear_extrude(file="project_zen_logo.dxf", height=8);
-}
-}
 ///////////////////////////////////////////////////////////////////////////////////////
 module backPanel(){
 
@@ -534,23 +448,6 @@ cylinder(r=4, h=575, $fn=50);
 }
 }
 ///////////////////////////////////////////////////////////////////////////////////////
-module sidePanel_left(){
-difference(){
-	translate([0,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2])
-		cube([middlePlatform_X,thickness,panelHeight], center=true);
-
-	translate([middlePlatform_X/2+thickness/2,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2-2*(panelHeight/5)])
-		cube([thickness+1,thickness+1,panelHeight/5+1], center=true);	
-
-
-	translate([middlePlatform_X/2+thickness/2,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2])
-		cube([thickness+1,thickness+1,panelHeight/5], center=true);	
-
-	translate([middlePlatform_X/2+thickness/2,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2+2*(panelHeight/5)+1])
-		cube([thickness+1,thickness+1,panelHeight/5+1], center=true);	
-}
-}
-
 
 ///////////////////////////////////////////////////////////////////////////////////////
 module sidePanel_right(){
