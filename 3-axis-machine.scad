@@ -1,24 +1,24 @@
 use <switch_mount.scad>
 use <button_mount_assembled.scad>
 use <keypad_mount_assembled.scad>
-use <panel_bracket.scad>
-use <leveling_feet.scad>
+//use <panel_bracket.scad>
+//use <leveling_feet.scad>
 use <power_receptacle.scad>
 use <nema17.scad>
-use <threads.scad>
+use <thread_library.scad>
 
 /////////////////////
 //DEFINED VARIABLES//
 /////////////////////
 
 //thickness
-thickness=6.35;
+thickness=6.25;
 
 //panel height
 panelHeight=101.6;
 
 //rod radius
-rodRadius=12.7 / 2;
+rodRadius=(6.25*2) / 2;
 
 
 //outer radius of circular corners
@@ -62,9 +62,9 @@ color("Gainsboro", a=1.0){
 bottomPlatform();
 }
 
-color("GhostWhite", a=1.0){
+//color("GhostWhite", a=1.0){
 frontPanel();
-}
+//}
 
 color("GhostWhite", a=1.0){
 backPanel();
@@ -74,7 +74,7 @@ sidePanel_right();
 
 sidePanel_left();
 
-threadedRods();
+//threadedRods();
 
 color("Black", a=1.0){
 topBrackets();
@@ -88,50 +88,69 @@ rotate([180,0,0])
 
 zMotors();
 
+//
+//translate([6-70,22,70])
+//rotate([0,0,-90])
+//printHead();
+//
+//translate([-70,0,70])
+//extruder();
 
-translate([6-70,22,70])
-rotate([0,0,-90])
-printHead();
 
-translate([-70,0,70])
-extruder();
-
-
+extrudedAluminum();
 
 ///////////////////////////////////////////////////////////////////////////////////////
 module bottomPlatform(){
 
 difference(){
 	minkowski() {
- 				cube([middlePlatform_X-platformOffset,bottomPlatform_Y-platformOffset,12.7], center=true);
- 				cylinder(r=platformOffset,h=12.7);
+ 				cube([middlePlatform_X-platformOffset,bottomPlatform_Y-platformOffset,(thickness)], center=true);
+ 				cylinder(r=platformOffset,h=(thickness));
 			}
 	
 	//holes for leveling legs//
-	translate([-feetCoordinates_X,-feetCoordinates_Y,0]) 
-   		cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
-	
-	translate([feetCoordinates_X,feetCoordinates_Y,0]) 
-      	cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
-	
-	translate([feetCoordinates_X,-feetCoordinates_Y,0]) 
-      	cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
-	
-	translate([-feetCoordinates_X,feetCoordinates_Y,0]) 
-   		cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
-	
+
+	//translate([-feetCoordinates,-feetCoordinates,-1]) 
+//   		cylinder(r=feetRadius,h=(6.25*2)+10, center=true, $fn=100);
+//	
+//	translate([feetCoordinates,feetCoordinates,-1]) 
+//      	cylinder(r=feetRadius,h=(6.25*2)+10, center=true, $fn=100);
+//	
+//	translate([feetCoordinates,-feetCoordinates,-1]) 
+//      	cylinder(r=feetRadius,h=(6.25*2)+10, center=true, $fn=100);
+//	
+//	translate([-feetCoordinates,feetCoordinates,-1]) 
+//   		cylinder(r=feetRadius,h=(6.25*2)+10, center=true, $fn=100);
+//	
+//	//mounting holes
+//	translate([-feetCoordinates,-feetCoordinates,-1]) 
+//   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);
+//
+//	translate([-feetCoordinates_X,-feetCoordinates_Y,0]) 
+//   		cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
+//	
+//	translate([feetCoordinates_X,feetCoordinates_Y,0]) 
+//      	cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
+//	
+//	translate([feetCoordinates_X,-feetCoordinates_Y,0]) 
+//      	cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
+//	
+//	translate([-feetCoordinates_X,feetCoordinates_Y,0]) 
+//   		cylinder(r=feetRadius+feetHoleOffset,h=12.7+26, center=true, $fn=100);
+//	
 	//mounting holes
 	translate([-feetCoordinates,-feetCoordinates,0]) 
    		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
+
 	
 	translate([feetCoordinates,feetCoordinates,-1]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
+   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);
 	
 	translate([-feetCoordinates,feetCoordinates,-1]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
+   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);
 	
 	translate([feetCoordinates,-feetCoordinates,-1]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);	
+   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);	
 
 	//inlay for panels
 	translate([-feetCoordinates+thickness/2,0,panelHeight/2 ])
@@ -140,12 +159,13 @@ difference(){
 	translate([feetCoordinates-thickness/2,0,panelHeight/2 ])
 		cube([thickness+1,middlePlatform_Y+1,panelHeight], center=true);
 	
-	threadedRods();
+	//threadedRods();
 
 sidePanel_right();
 sidePanel_left();
 
 
+extrudedAluminum();
 
 
 }
@@ -157,33 +177,39 @@ module middlePlatform(){
 
 difference(){
 	translate([0,0,panelHeight])
-		cube([middlePlatform_X,middlePlatform_Y,12.7], center=true);
+		cube([middlePlatform_X,middlePlatform_Y,(6.25*2)], center=true);
 
 //mounting holes
 	translate([-feetCoordinates,-feetCoordinates,100]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
+   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);
 	
 	translate([feetCoordinates,feetCoordinates,100]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
+   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);
 	
 	translate([-feetCoordinates,feetCoordinates,100]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
+   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);
 	
 	translate([feetCoordinates,-feetCoordinates,100]) 
-   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);	
+   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);	
 
 
 //inlay for panels
-	translate([feetCoordinates-thickness/2,0,panelHeight/2 ])
+	translate([(middlePlatform_X/2)-thickness/2,0,panelHeight/2 ])
 		cube([thickness+1,middlePlatform_Y+1,panelHeight], center=true);
 	
-	translate([-feetCoordinates+thickness/2,0,panelHeight/2 ])
-		cube([thickness+1,middlePlatform_Y-thickness*2+1,panelHeight], center=true);
+	translate([(-middlePlatform_X/2)+thickness/2,0,panelHeight/2 ])
+		cube([thickness+1,middlePlatform_Y-thickness*4+1,panelHeight], center=true);
 
 
 sidePanel_right();
 sidePanel_left();
 
+translate([-1,0,0])
+sidePanel_left();
+
+
+translate([-1,0,0])
+sidePanel_right();
 
 	threadedRods();
 }
@@ -208,34 +234,37 @@ module topPlatform(){
 
 difference(){
 	
-	translate([0,0,panelHeight+570])
+	translate([0,0,panelHeight+570+200])
 			minkowski() {
- 				cube([middlePlatform_X-platformOffset,bottomPlatform_Y-platformOffset,12.7], center=true);
- 				cylinder(r=platformOffset,h=12.7);
+ 				cube([middlePlatform_X-platformOffset,bottomPlatform_Y-platformOffset,(thickness)], center=true);
+ 				cylinder(r=platformOffset,h=(thickness));
 			}
 			
 
 ////mountng holes
 //	translate([-feetCoordinates,-feetCoordinates,panelHeight+570]) 
-//   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
+//   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);
 //	
 //	translate([feetCoordinates,feetCoordinates,panelHeight+570]) 
-//   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
+//   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);
 //	
 //	translate([-feetCoordinates,feetCoordinates,panelHeight+570]) 
-//   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);
+//   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);
 //	
 //	translate([feetCoordinates,-feetCoordinates,panelHeight+570]) 
-//   		cylinder(r=rodRadius,h=12.7+10, center=true, $fn=100);	
+//   		cylinder(r=rodRadius,h=(6.25*2)+10, center=true, $fn=100);	
 //
 //
 //
 //	threadedRods();
 
+extrudedAluminum();
+
+
 //logo
-	translate([100,-185,panelHeight+570+4.5],center=true)
+	translate([200,-350,panelHeight+570+200+7],center=true)
 	rotate([0,0,90])
-	resize([400,0,0], auto=true)
+	resize([middlePlatform_X-300,0,0], auto=true)
 		dxf_linear_extrude(file="project_zen_logo.dxf", height=8);
 }
 }
@@ -243,7 +272,7 @@ difference(){
 module backPanel(){
 
 difference(){
-	translate([-feetCoordinates+thickness/2,0,panelHeight/2 ])
+	translate([(-middlePlatform_X/2)+thickness/2,0,panelHeight/2 ])
 		cube([thickness,middlePlatform_Y-thickness*4,panelHeight], center=true);
 	
 //power switch cut out
@@ -312,28 +341,15 @@ translate([0,2.5,1])
 fan();	
 }
 
-	translate([-middlePlatform_X/2,-135,panelHeight/2+6], center=true)
-	rotate([45,0,0])
-		cube([thickness,10,10]);
-
-	translate([-middlePlatform_X/2+thickness,-135+17.5,panelHeight/2+6], center=true)
-	rotate([45,0,180])
-		cube([thickness,10,10]);
+	
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 module frontPanel(){
 
 difference(){	
-	translate([feetCoordinates-thickness/2,0,panelHeight/2 ])
+	translate([(middlePlatform_X/2)-thickness/2,0,panelHeight/2 ])
 		cube([thickness,middlePlatform_Y,panelHeight], center=true);
 
-//button mount cutout
-	translate([393+10,175,25])
-		button_mount_assembled();
-
-//keypad mount cutout
-	translate([393+10,175-135,25])
-		keypad_mount_assembled();
 
 translate([middlePlatform_X/2-thickness-1,200,panelHeight/2 ], center=true)
 rotate([0,0,-90])
@@ -355,26 +371,26 @@ cube([50,80,30]);
 	translate([325,175,40])
 	
 		panelHole();
-	
+	translate([1,0,0])
 		bracketHoles();
 
-	translate([0,-285*2,0])
+	translate([1,-285*2,0])
 		bracketHoles();
 
-	translate([0,-285*2,54])
+	translate([1,-285*2,54])
 		bracketHoles();
 
-	translate([0,0,54])
+	translate([1,0,54])
 		bracketHoles();
 
 translate([1,middlePlatform_Y/2-thickness/2-thickness,panelHeight/2+panelHeight/5])
 		cube([middlePlatform_X,thickness,panelHeight/5], center=true);
 
-translate([1,middlePlatform_Y/2-thickness/2-thickness,panelHeight/2-panelHeight/5])
-		cube([middlePlatform_X,thickness,panelHeight/5], center=true);
+translate([1,middlePlatform_Y/2-thickness/2-thickness,panelHeight/2-panelHeight/5+.25])
+		cube([middlePlatform_X,thickness,panelHeight/5-.5], center=true);
 
-translate([1,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2-panelHeight/5])
-		cube([middlePlatform_X,thickness,panelHeight/5], center=true);
+translate([1,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2-panelHeight/5+.25])
+		cube([middlePlatform_X,thickness,panelHeight/5-.5], center=true);
 
 translate([1,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2+panelHeight/5])
 		cube([middlePlatform_X,thickness,panelHeight/5], center=true);
@@ -382,11 +398,7 @@ translate([1,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2+panelHeight
 }	
 }
 
-	translate([393+1,175-135,0])
-		keypad_mount_assembled();
-
-	translate([393+1,175,0])
-		button_mount_assembled();
+	
 ///////////////////////////////////////////////////////////////////////////////////////
 
 module usbHole(){
@@ -459,15 +471,15 @@ module topBrackets(){
 module bracketHole(){
 
 	rotate([0,90,0])
-	cylinder(r=3, h=1000, $fn=100);
+	cylinder(r=3, h=2000, $fn=100);
 }
 
 module bracketHoles(){
 	
-	translate([-500,285,25+6])
+	translate([-500-1,285,25+6])
 		bracketHole();
 
-	translate([-500,285,10+6])
+	translate([-500-1,285,10+6])
 		bracketHole();
 }
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -518,46 +530,73 @@ module fan(){
 	translate([-380,105,30-11])
 		cube ([50,5,60]);
 }
-///////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 
 module zMotors(){
-	translate([-middlePlatform_X/12,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50,48+thickness/2+22-9.75-12.7])
+	translate([-middlePlatform_X/12,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50,48+thickness/2+22-9.75-200-(6.25*2)])
 		nema17();
 
-	translate([-middlePlatform_X/12,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50,48+thickness/2+22-9.75-12.7])
+	translate([-middlePlatform_X/12,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50,48+thickness/2+22-9.75-200-(6.25*2)])
 		nema17();	
 
 
 
-translate([-middlePlatform_X/12+1.25,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+1+50,48+thickness/2+30-9.75-12.7])
+translate([-middlePlatform_X/12+1.25,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+1+50,48+thickness/2+30-9.75-200-(6.25*2)])
 import("coupler.stl");
 
-translate([-middlePlatform_X/12+1.25,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4+1-50,48+thickness/2+30-9.75-12.7])
+translate([-middlePlatform_X/12+1.25,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4+1-50,48+thickness/2+30-9.75-200-(6.25*2)])
 import("coupler.stl");
 
 color("LightSlateGray"){
-translate([-middlePlatform_X/12,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50,0+90-9.75-12.7])
-cylinder(r=4, h=575, $fn=50);
+translate([-middlePlatform_X/12,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50,0+90-200-9.75-(6.25*2)])
+trapezoidThreadNegativeSpace( 
+        length=575+200,
+        pitch=2,                
+        pitchRadius=5,             
+        threadHeightToPitch=0.5,     
+        profileRatio=0.5,    
+        threadAngle=30,             
+        countersunk=0,     
+        clearance=0.1,         
+        backlash=0.1,             
+        stepsPerTurn=24    )         
+    ;
 
-translate([-middlePlatform_X/12,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50,90-9.75-12.7])
-cylinder(r=4, h=575, $fn=50);
+
+
+//Z-axis acme rods
+
+translate([-middlePlatform_X/12,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50,90-9.75-200-(6.25*2)])
+trapezoidThreadNegativeSpace( 
+        length=575+200,
+        pitch=2,                
+        pitchRadius=5,             
+        threadHeightToPitch=0.5,     
+        profileRatio=0.5,    
+        threadAngle=30,             
+        countersunk=0,     
+        clearance=0.1,         
+        backlash=0.1,             
+        stepsPerTurn=24    )         
+    ;
+
 }
 }
-///////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 module sidePanel_left(){
 difference(){
 	translate([0,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2])
 		cube([middlePlatform_X,thickness,panelHeight], center=true);
 
 	translate([middlePlatform_X/2+thickness/2,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2-2*(panelHeight/5)])
-		cube([thickness+1,thickness+1,panelHeight/5+1], center=true);	
+		cube([thickness+thickness+thickness,thickness+1,panelHeight/5+1], center=true);	
 
 
 	translate([middlePlatform_X/2+thickness/2,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2])
-		cube([thickness+1,thickness+1,panelHeight/5], center=true);	
+		cube([thickness+thickness+thickness,thickness+1,panelHeight/5], center=true);	
 
 	translate([middlePlatform_X/2+thickness/2,-middlePlatform_Y/2+thickness/2+thickness,panelHeight/2+2*(panelHeight/5)+1])
-		cube([thickness+1,thickness+1,panelHeight/5+1], center=true);	
+		cube([thickness+thickness+thickness,thickness+1,panelHeight/5+1], center=true);	
 }
 }
 
@@ -583,83 +622,270 @@ difference(){
 	
 ///////////////////////////////////////////////////////////////////////////////////////
 
-//english_thread(1/2,609.6,2, internal=true);
-//translate([-middlePlatform_X/12-37,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4,350-12.7/2])
-//cube([12.7,(bottomPlatform_Y-middlePlatform_Y)/2,700], center=true);
-//
-//translate([-middlePlatform_X/12-37,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4,350-12.7/2])
-//cube([12.7,(bottomPlatform_Y-middlePlatform_Y)/2,700], center=true);
-//
 
 
 
 
-translate([-middlePlatform_X/12+75,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-25,panelHeight+51/2+12.7/2-51+570-12.7])
+
+
+translate([-middlePlatform_X/12+75,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-25,panelHeight+51/2+(6.25*2)/2-51+570+200-(6.25*2)])
 import("ss_standoff.stl");
 
-translate([-middlePlatform_X/12-75,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-25,panelHeight+51/2+12.7/2-51+570-12.7])
+translate([-middlePlatform_X/12-75,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-25,panelHeight+51/2+(6.25*2)/2-51+570+200-(6.25*2)])
 import("ss_standoff.stl");
 
-translate([-middlePlatform_X/12+75,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+25,panelHeight+51/2+12.7/2-51+570-12.7])
+translate([-middlePlatform_X/12+75,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+25,panelHeight+51/2+(6.25*2)/2-51+570+200-(6.25*2)])
 import("ss_standoff.stl");
 
-translate([-middlePlatform_X/12-75,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+25,panelHeight+51/2+12.7/2-51+570-12.7])
+translate([-middlePlatform_X/12-75,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+25,panelHeight+51/2+(6.25*2)/2-51+570+200-(6.25*2)])
 import("ss_standoff.stl");
 
-translate([-middlePlatform_X/12-75,(bottomPlatform_Y-middlePlatform_Y)/2,panelHeight+51/2+12.7/2-51+570-12.7])
+translate([-middlePlatform_X/12-75,(bottomPlatform_Y-middlePlatform_Y)/2,panelHeight+51/2+(6.25*2)/2-51+570+200-(6.25*2)])
 import("ss_standoff.stl");
 
-translate([-middlePlatform_X/12+75,(bottomPlatform_Y-middlePlatform_Y)/2,panelHeight+51/2+12.7/2-51+570-12.7])
+translate([-middlePlatform_X/12+75,(bottomPlatform_Y-middlePlatform_Y)/2,panelHeight+51/2+(6.25*2)/2-51+570+200-(6.25*2)])
 import("ss_standoff.stl");
 
-translate([-middlePlatform_X/12+75,-(bottomPlatform_Y-middlePlatform_Y)/2,panelHeight+51/2+12.7/2-51+570-12.7])
+translate([-middlePlatform_X/12+75,-(bottomPlatform_Y-middlePlatform_Y)/2,panelHeight+51/2+(6.25*2)/2-51+570+200-(6.25*2)])
 import("ss_standoff.stl");
 
-translate([-middlePlatform_X/12-75,-(bottomPlatform_Y-middlePlatform_Y)/2,panelHeight+51/2+12.7/2-51+570-12.7])
+translate([-middlePlatform_X/12-75,-(bottomPlatform_Y-middlePlatform_Y)/2,panelHeight+51/2+(6.25*2)/2-51+570+200-(6.25*2)])
 import("ss_standoff.stl");
 
 difference(){
 
-translate([-middlePlatform_X/12,0,panelHeight+570-51-12.7])
-		cube([middlePlatform_X/4,bottomPlatform_Y-50,12.7], center=true);
 
-	translate([-middlePlatform_X/12,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50,panelHeight+51/2+12.7/2-51+570-12.7-75])
+
+minkowski() {
+				translate([-middlePlatform_X/12,0,panelHeight+570+200-51-(6.25*2)+thickness/2])
+ 				cube([middlePlatform_X/4,bottomPlatform_Y-50,thickness], center=true);
+ 				cylinder(r=platformOffset,h=(thickness));
+			}
+
+
+
+	translate([-middlePlatform_X/12,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50,panelHeight+51/2+(6.25*2)/2-51+570-(6.25*2)-75])
 		cylinder(r=24/2, h=100, $fn=50);
 
-translate([-middlePlatform_X/12,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50,panelHeight+51/2+12.7/2-51+570-12.7-75])
+translate([-middlePlatform_X/12,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50,panelHeight+51/2+(6.25*2)/2-51+570-(6.25*2)-75])
 		cylinder(r=24/2, h=100, $fn=50);
 
 translate([-middlePlatform_X/12-35,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60,0])
-cylinder(r=12, h=panelHeight+570+12.7/2-12.7, $fn=50);
+cylinder(r=12, h=panelHeight+570+(6.25*2)/2-(6.25*2), $fn=50);
 
 translate([-middlePlatform_X/12-35,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60,0])
-cylinder(r=12, h=panelHeight+570+12.7/2-12.7, $fn=50);
+cylinder(r=12, h=panelHeight+570+(6.25*2)/2-(6.25*2), $fn=50);
 
 }
 
 
 
 
-translate([-middlePlatform_X/12-35,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60,0+90+200])
-rotate([0,0,-30])
+translate([-middlePlatform_X/12+35,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60,0+90+200])
+rotate([0,0,-15])
 import("10mm_linear_bearing.stl");
 
-translate([-middlePlatform_X/12-35,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60,0+90+200])
-rotate([0,0,180+30])
+translate([-middlePlatform_X/12+35,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60,0+90+200])
+rotate([0,0,180+15])
 import("10mm_linear_bearing.stl");
 
 
-translate([-middlePlatform_X/12-35,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60,0])
-cylinder(r=10, h=panelHeight+570+12.7/2-12.7, $fn=50);
 
-translate([-middlePlatform_X/12-35,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60,0])
-cylinder(r=10, h=panelHeight+570+12.7/2-12.7, $fn=50);
+module bearingBracketsLeft(){
+difference(){
+
+	translate([-8+35-102+30,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60+15,0+90+200])
+ 	rotate([0,0,-15])
+	cube([150,thickness,48], center=true);
+ 	
+	translate([-8+35-102+30-50,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-15-8-25-3,0+90+200])
+	cube([75,50,50], center=true);
+			
+	translate([-middlePlatform_X/12+35,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60,0+90+200])
+rotate([0,0,-15])
+import("10mm_linear_bearing.stl");		
+}
+}
+
+module bearingBrackets(){
+difference(){
+
+	translate([-8+35-102+30,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-15,0+90+200])
+ 	rotate([0,0,180+15])
+	cube([150,thickness,48], center=true);
+ 	
+	translate([-8+35-102+30-50,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-15-8-25-3,0+90+200])
+	cube([75,50,50], center=true);
+	
+	translate([-middlePlatform_X/12+35,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60,0+90+200])
+rotate([0,0,180+15])
+import("10mm_linear_bearing.stl");	
+}
 
 
-translate([-middlePlatform_X/12,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50,12.7/2])
+
+
+translate([-middlePlatform_X/12-35+20+20-30,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60+15+8,0+90+200])
+	cube([20,thickness,40], center=true);
+
+
+difference(){
+
+translate([-8+35-102+30-50,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60+15+8,0+90+200])
+	cube([75,thickness,48], center=true);
+
+
+translate([-8+35-102+30-50-58,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60+15+8,0+90+200])
+	cube([75,thickness*2,50], center=true);
+ 	
+
+
+}
+}
+
+
+
+
+
+difference(){
+
+translate([-8+35-102+30-50,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-15-8,0+90+200])
+	cube([75,thickness,48], center=true);
+
+
+translate([-8+35-102+80,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-15,0+90+200])
+ 	rotate([0,0,180+15])
+	cube([140,50,50], center=true);
+
+translate([-8+6-102,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-19+25,0+90+200])
+rotate([90,0,0])
+cylinder(r=13, h=50, $fn=50);
+}
+
+difference(){
+bearingBrackets();
+
+
+
+translate([-8+35-102+30,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-15-29.1,0+90+200])
+ 	rotate([0,0,180+15])
+	cube([150,50,50], center=true);
+
+translate([-8+6-102,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-19+25,0+90+200])
+rotate([90,0,0])
+cylinder(r=13, h=50, $fn=50);
+
+
+translate([-8+35-102+30+97,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-15,0+90+200])
+ 	
+	cube([150,50,50], center=true);
+
+}
+
+
+
+
+
+
+//left
+
+
+				translate([-middlePlatform_X/12-35+20-20,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60+15+8+thickness/2,0+90+200+20])
+				rotate([90,0,0])
+				trapezoid(40, 20, 30,thickness);
+
+
+				translate([-middlePlatform_X/12-35+20+20,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60+15+8+thickness/2,0+90+200-20])
+				rotate([90,180,0])
+				trapezoid(40, 20, 30,thickness);
+
+
+
+
+
+
+//
+//
+//
+//difference(){
+//bearingBracketsLeft();
+//
+//
+//
+//translate([-8+35-102+30,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60+15+29.1,0+90+200])
+// 	rotate([0,0,180+15])
+//	cube([150,50,50], center=true);
+//
+//
+//
+//
+//translate([-8+35-102+30+97,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60+15,0+90+200])
+// 	
+//	cube([150,50,50], center=true);
+//
+//}
+
+
+
+
+
+
+
+
+				translate([-middlePlatform_X/12-35+20-20,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-15-8+thickness/2,0+90+200+20])
+				rotate([90,0,0])
+				trapezoid(40, 20, 30,thickness);
+
+
+				translate([-middlePlatform_X/12-35+20+20,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-15-8+thickness/2,0+90+200-20])
+				rotate([90,180,0])
+				trapezoid(40, 20, 30,thickness);
+			
+
+
+
+//nema X-axis
+
+
+translate([-8+6-102,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-19,0+90+200])
+rotate([0,90,-90])
+nema17();
+
+ //x axis acme rod
+
+
+
+translate([-8+6-102,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-19+25-60,0+90+200])
+rotate([90,0,0])
+    trapezoidThreadNegativeSpace( 
+        length=670,
+        pitch=2,                
+        pitchRadius=5,             
+        threadHeightToPitch=0.5,     
+        profileRatio=0.5,    
+        threadAngle=30,             
+        countersunk=0,     
+        clearance=0.1,         
+        backlash=0.1,             
+        stepsPerTurn=24    )         
+    ;
+
+
+
+
+
+// Vertical Smooth Rod
+translate([-middlePlatform_X/12+35,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50-60,0])
+cylinder(r=5, h=panelHeight+570+200+(6.25*2)/2-(6.25*2), $fn=50);
+
+translate([-middlePlatform_X/12+35,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60,0])
+cylinder(r=5, h=panelHeight+570+200+(6.25*2)/2-(6.25*2), $fn=50);
+
+
+translate([-middlePlatform_X/12,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50,(6.25*2)/2])
 import("acme_end_cap.stl");
 
-translate([-middlePlatform_X/12,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50,12.7/2])
+translate([-middlePlatform_X/12,-bottomPlatform_Y/2+(bottomPlatform_Y-middlePlatform_Y)/4+50,(6.25*2)/2])
 import("acme_end_cap.stl");
 
 translate([middlePlatform_X/2-thickness-1,200,panelHeight/2 ], center=true)
@@ -668,21 +894,142 @@ import("20x4_lcd.stl");
 
 
 
-translate([-middlePlatform_X/12-35+20,0,200+90-40])
+translate([-middlePlatform_X/12-35+20,0,200+90-35])
 rotate([90,0,0])
-cylinder(r=4, h=650, $fn=50, center=true);
+cylinder(r=4, h=725, $fn=50, center=true);
 
-translate([-middlePlatform_X/12-35+20,0,200+90+40])
+translate([-middlePlatform_X/12-35+20,0,200+90+35])
 rotate([90,0,0])
-cylinder(r=4, h=650, $fn=50, center=true);
+cylinder(r=4, h=725, $fn=50, center=true);
 
 
-translate([-middlePlatform_X/12-35+20,0,200+90-40])
+
+
+	
+module trapezoid(width_base, width_top,height,thickness) {
+linear_extrude(height = thickness) 
+polygon(points=[[0,0],[width_base,0],[width_base-(width_base-width_top)/2,height],[(width_base-width_top)/2,height]], paths=[[0,1,2,3]]);
+}
+
+module bearingPlate(){
+
+
+
+				translate([-middlePlatform_X/12-37+35,0,200+90+thickness/4+12+5+thickness/2])
+				rotate([0,0,0])
+ 				cube([35,45,40], center=true);
+				
+
+
+
+
+difference(){
+minkowski() {
+				translate([-middlePlatform_X/12-37+35,0,200+90])
+				rotate([0,0,0])
+ 				cube([110,40,thickness/2], center=true);
+				cylinder(r=3,h=(thickness/2), $fn=50);
+}
+
+translate([(-middlePlatform_X/12)-37+70,25,200+90- 20])
+cylinder(r=4,h=(50), $fn=50);
+
+
+translate([(-middlePlatform_X/12)-37,25,200+90- 20])
+cylinder(r=4,h=(50), $fn=50);
+
+translate([(-middlePlatform_X/12)-37+70,25-40-10,200+90- 20])
+cylinder(r=4,h=(50), $fn=50);
+
+translate([(-middlePlatform_X/12)-37,25-40-10,200+90- 20])
+cylinder(r=4,h=(50), $fn=50);
+
+}
+
+
+
+
+
+difference(){
+
+minkowski() {
+translate([(-middlePlatform_X/12)-37+15+35,10,200+90- thickness/4])
+resize([40,20,thickness/2])
+trapezoid(80, 20, 35,thickness);
+cylinder(r=3,h=(thickness/2), $fn=50);
+}
+
+translate([(-middlePlatform_X/12)-37+70,25,200+90- 20])
+cylinder(r=4,h=(50), $fn=50);
+
+}
+
+
+difference(){
+minkowski() {
+translate([(-middlePlatform_X/12)-37+15-35,10,200+90- thickness/4])
+resize([40,20,thickness/2])
+trapezoid(80, 20, 35,thickness);
+cylinder(r=3,h=(thickness/2), $fn=50);
+}
+
+
+translate([(-middlePlatform_X/12)-37,25,200+90- 20])
+cylinder(r=4,h=(50), $fn=50);
+
+}
+
+difference(){	
+minkowski() {
+translate([(-middlePlatform_X/12)-37+15+70+5,-10,200+90- thickness/4])
+resize([40,20,thickness/2])
+rotate([0,0,180])
+trapezoid(80, 20, 35,thickness);
+cylinder(r=3,h=(thickness/2), $fn=50);
+}
+
+
+translate([(-middlePlatform_X/12)-37+70,25-40-10,200+90- 20])
+cylinder(r=4,h=(50), $fn=50);
+
+}
+
+
+difference(){
+minkowski() {
+translate([(-middlePlatform_X/12)-37+15+0+5,-10,200+90- thickness/4])
+resize([40,20,thickness/2])
+rotate([0,0,180])
+trapezoid(80, 20, 35,thickness);
+cylinder(r=3,h=(thickness/2), $fn=50);
+}
+
+translate([(-middlePlatform_X/12)-37,25-40-10,200+90- 20])
+cylinder(r=4,h=(50), $fn=50);
+
+}
+}
+
+difference(){
+
+translate([290-middlePlatform_X/12-37+35+3,0,375.5])
+rotate([0,-90,0])
+bearingPlate();
+
+translate([-8+6-102,bottomPlatform_Y/2-(bottomPlatform_Y-middlePlatform_Y)/4-50+60-19+25-60,0+90+200])
+rotate([90,0,0])
+cylinder(r=7, h=670, $fn=50);
+
+}
+
+
+
+translate([-middlePlatform_X/12-35+20,0,200+90-35])
 rotate([0,90,-90])
 import("8mm_linear_bearing.stl");
 
 
-translate([-middlePlatform_X/12-35+20,0,200+90+40])
+translate([-middlePlatform_X/12-35+20,0,200+90+35])
 rotate([0,90,-90])
 import("8mm_linear_bearing.stl");
 
@@ -736,5 +1083,34 @@ rotate([0,90,0])
 nema17();
 }
 
+//
+//translate([0,425,panelHeight+250])
+//rotate([90,0,0])
+//cube([middlePlatform_X-platformOffset,bottomPlatform_Y-platformOffset-200,(thickness)], center=true);
 
 
+module extrudedAluminum(){
+
+resize([0,0,panelHeight+570+200+5])
+translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,50])
+import("extruded_aluminum_40.stl");
+
+
+resize([0,0,panelHeight+570+200+5])
+translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,50])
+rotate([0,0,-90])
+import("extruded_aluminum_40.stl");
+
+
+resize([0,0,panelHeight+570+200+5])
+translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,50])
+rotate([0,0,180])
+import("extruded_aluminum_40.stl");
+
+
+resize([0,0,panelHeight+570+200+5])
+translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,50])
+rotate([0,0,90])
+import("extruded_aluminum_40.stl");
+
+}
