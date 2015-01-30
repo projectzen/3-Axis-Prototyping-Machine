@@ -1,6 +1,6 @@
-use <switch_mount.scad>
-use <button_mount_assembled.scad>
-use <keypad_mount_assembled.scad>
+//use <switch_mount.scad>
+//use <button_mount_assembled.scad>
+//use <keypad_mount_assembled.scad>
 //use <panel_bracket.scad>
 //use <leveling_feet.scad>
 use <power_receptacle.scad>
