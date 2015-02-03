@@ -1,3 +1,46 @@
+/////////////////////
+//DEFINED VARIABLES//
+/////////////////////
+
+//thickness
+thickness=6.25;
+
+//panel height
+panelHeight=101.6;
+
+//rod radius
+rodRadius=(6.25*2) / 2;
+
+
+//outer radius of circular corners
+circleRadius=50;
+
+//cartesian plane coordinates where the threaded rods pass through
+rodCoordinates=420;
+
+//cartesian plane coordinates where the leveling feet mount/pass through
+
+
+bottomPlatform_Y=900;
+
+
+
+//length and width
+middlePlatform_X=1000;
+
+//Radius of rounded edges
+platformOffset=15;
+
+feetOffset=15;
+feetCoordinates_X=middlePlatform_X/2-feetOffset;
+feetCoordinates_Y=450-feetOffset;
+//leveling feet radius
+feetRadius=4.5;
+feetHoleOffset=0.5;
+
+middlePlatform_Y=600+thickness*4;
+///////////////////////////////////////////////////////////////////////////////////////
+
 module backPanel(){
 
 difference(){
@@ -206,3 +249,7 @@ module fan(){
 	translate([-380,105,30-11])
 		cube ([50,5,60]);
 }
+
+
+
+//backPanel();

@@ -53,27 +53,27 @@ feetHoleOffset=0.5;
 middlePlatform_Y=600+thickness*4;
 ///////////////////////////////////////////////////////////////////////////////////////
 
-topPlatform();
+//topPlatform();
 
 
-middlePlatform();
-
-
-
-bottomPlatform();
+//middlePlatform();
 
 
 
-frontPanel();
+//bottomPlatform();
 
 
 
-backPanel();
+//frontPanel();
 
 
-sidePanel_right();
 
-sidePanel_left();
+//backPanel();
+
+
+//sidePanel_right();
+
+//sidePanel_left();
 
 
 
@@ -454,24 +454,24 @@ import("8mm_linear_bearing.stl");
 
 module extrudedAluminum(){
 
-resize([0,0,panelHeight+570+200+5])
+resize([0,0,panelHeight+570+200])
 translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,50])
 import("extruded_aluminum_40.stl");
 
 
-resize([0,0,panelHeight+570+200+5])
+resize([0,0,panelHeight+570+200])
 translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,50])
 rotate([0,0,-90])
 import("extruded_aluminum_40.stl");
 
 
-resize([0,0,panelHeight+570+200+5])
+resize([0,0,panelHeight+570+200])
 translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,50])
 rotate([0,0,180])
 import("extruded_aluminum_40.stl");
 
 
-resize([0,0,panelHeight+570+200+5])
+resize([0,0,panelHeight+570+200])
 translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,50])
 rotate([0,0,90])
 import("extruded_aluminum_40.stl");
