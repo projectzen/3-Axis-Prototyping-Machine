@@ -26,7 +26,7 @@ middlePlatform_X=1000;
 platformOffset=15;
 
 //Radius of holes in inlays
-inlayHoleRaduis = 4;
+inlayHoleRadius = 4;
 
 inlayDepth = thickness/4;
 
@@ -63,16 +63,16 @@ import("extruded_aluminum_40.stl");
 ////
 module inlayHoles() {
 	translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,0])
-	cylinder(h=4*thickness,r=inlayHoleRadius, center=true);
+	cylinder(h=4*thickness,r=inlayHoleRadius, center=true, , $fn=100);
 
 	translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,0])
-	cylinder(h=4*thickness,r=inlayHoleRadius,center=true);
+	cylinder(h=4*thickness,r=inlayHoleRadius,center=true, , $fn=100);
 
 	translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,0])
-	cylinder(h=4*thickness,r=inlayHoleRadius,center=true);
+	cylinder(h=4*thickness,r=inlayHoleRadius,center=true, , $fn=100);
 
 	translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,0])
-	cylinder(h=4*thickness,r=inlayHoleRadius,center=true);
+	cylinder(h=4*thickness,r=inlayHoleRadius,center=true, $fn=100);
 }
 
 ////
