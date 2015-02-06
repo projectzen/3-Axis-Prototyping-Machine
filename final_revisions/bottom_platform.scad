@@ -8,6 +8,9 @@ include <back_panel.scad>
 //thickness
 thickness=6.25;
 
+//Depth of inlays in aluminum
+inlayDepth=6.25/6;
+
 //panel height
 panelHeight=101.6;
 
@@ -46,27 +49,27 @@ module extrudedAluminum(){
 
 resize([0,0,thickness])
 //the z-axis determines the amount subtracted from the aluminum plate 
-translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,+1]) 
+translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,+inlayDepth]) 
 import("extruded_aluminum_40.stl");
 
 
 resize([0,0,thickness])
 //the z-axis determines the amount subtracted from the aluminum plate 
-translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,+1])
+translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,+inlayDepth])
 rotate([0,0,-90])
 import("extruded_aluminum_40.stl");
 
 
 resize([0,0,thickness])
 //the z-axis determines the amount subtracted from the aluminum plate 
-translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,+1])
+translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,+inlayDepth])
 rotate([0,0,180])
 import("extruded_aluminum_40.stl");
 
 
 resize([0,0,thickness])
 //the z-axis determines the amount subtracted from the aluminum plate 
-translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,+1])
+translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,+inlayDepth])
 rotate([0,0,90])
 import("extruded_aluminum_40.stl");
 
