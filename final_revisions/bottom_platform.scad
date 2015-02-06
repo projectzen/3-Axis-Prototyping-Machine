@@ -116,5 +116,4 @@ inlayHoles();
 
 }
 }
-inlayHoles();
 bottomPlatform();
