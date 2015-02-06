@@ -25,6 +25,11 @@ middlePlatform_X=1000;
 //Radius of rounded edges
 platformOffset=15;
 
+//Radius of holes in inlays
+inlayHoleRaduis = 4;
+
+inlayDepth = thickness/4;
+
 
 ///////////////////////////
 
@@ -32,28 +37,45 @@ platformOffset=15;
 module extrudedAluminum(){
 
 resize([0,0,thickness])
-translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,-1])
+translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,-inlayDepth])
 import("extruded_aluminum_40.stl");
 
 
 resize([0,0,thickness])
-translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,-1])
+translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,-inlayDepth])
 rotate([0,0,-90])
 import("extruded_aluminum_40.stl");
 
 
 resize([0,0,thickness])
-translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,-1])
+translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,-inlayDepth])
 rotate([0,0,180])
 import("extruded_aluminum_40.stl");
 
 
 resize([0,0,thickness])
-translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,-1])
+translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,-inlayDepth])
 rotate([0,0,90])
 import("extruded_aluminum_40.stl");
 
 }
+
+////
+module inlayHoles() {
+	translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,0])
+	cylinder(h=4*thickness,r=inlayHoleRadius, center=true);
+
+	translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,0])
+	cylinder(h=4*thickness,r=inlayHoleRadius,center=true);
+
+	translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,0])
+	cylinder(h=4*thickness,r=inlayHoleRadius,center=true);
+
+	translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,0])
+	cylinder(h=4*thickness,r=inlayHoleRadius,center=true);
+}
+
+////
 
 ////
 
@@ -69,6 +91,8 @@ difference(){
 			}
 			
 extrudedAluminum();
+
+inlayHoles();
 
 
 //logo
