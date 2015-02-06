@@ -8,6 +8,9 @@ include <back_panel.scad>
 //thickness
 thickness=6.25;
 
+//Depth of inlays in aluminum
+inlayDepth=6.25/6;
+
 //panel height
 panelHeight=101.6;
 
@@ -28,7 +31,8 @@ middlePlatform_X=1000;
 //Radius of rounded edges
 platformOffset=15;
 
-
+//Radius of inlay holes
+inlayHoleRadius=4.25;
 
 
 feetOffset=15;
@@ -46,30 +50,46 @@ module extrudedAluminum(){
 
 resize([0,0,thickness])
 //the z-axis determines the amount subtracted from the aluminum plate 
-translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,+1]) 
+translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,+inlayDepth]) 
 import("extruded_aluminum_40.stl");
 
 
 resize([0,0,thickness])
 //the z-axis determines the amount subtracted from the aluminum plate 
-translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,+1])
+translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,+inlayDepth])
 rotate([0,0,-90])
 import("extruded_aluminum_40.stl");
 
 
 resize([0,0,thickness])
 //the z-axis determines the amount subtracted from the aluminum plate 
-translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,+1])
+translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,+inlayDepth])
 rotate([0,0,180])
 import("extruded_aluminum_40.stl");
 
 
 resize([0,0,thickness])
 //the z-axis determines the amount subtracted from the aluminum plate 
-translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,+1])
+translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,+inlayDepth])
 rotate([0,0,90])
 import("extruded_aluminum_40.stl");
 
+}
+
+////
+
+module inlayHoles() {
+	translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,0])
+	cylinder(h=4*thickness,r=inlayHoleRadius, center=true);
+
+	translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,0])
+	cylinder(h=4*thickness,r=inlayHoleRadius,center=true);
+
+	translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,0])
+	cylinder(h=4*thickness,r=inlayHoleRadius,center=true);
+
+	translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,0])
+	cylinder(h=4*thickness,r=inlayHoleRadius,center=true);
 }
 
 ////
@@ -92,6 +112,7 @@ sidePanel_left();
 frontPanel();
 backPanel();
 extrudedAluminum();
+inlayHoles();
 
 }
 }
