@@ -28,37 +28,12 @@ platformOffset=15;
 //Radius of holes in inlays
 inlayHoleRadius = 4;
 
-inlayDepth = thickness/4;
+inlayDepth = thickness/2;
 
 
 ///////////////////////////
 
-//IMPORT EXTRUDED ALUMINUM STL
-module extrudedAluminum(){
 
-resize([0,0,thickness])
-translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,-inlayDepth])
-import("extruded_aluminum_40.stl");
-
-
-resize([0,0,thickness])
-translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,-inlayDepth])
-rotate([0,0,-90])
-import("extruded_aluminum_40.stl");
-
-
-resize([0,0,thickness])
-translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,-inlayDepth])
-rotate([0,0,180])
-import("extruded_aluminum_40.stl");
-
-
-resize([0,0,thickness])
-translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,-inlayDepth])
-rotate([0,0,90])
-import("extruded_aluminum_40.stl");
-
-}
 
 ////
 module inlayHoles() {
@@ -79,28 +54,108 @@ module inlayHoles() {
 
 ////
 
+module extrudedAluminumInset() {
+
+translate([-middlePlatform_X/2+55,-bottomPlatform_Y/2+55,-inlayDepth])
+cube([40,40,thickness], center=true);
+
+translate([-middlePlatform_X/2+55+20,-bottomPlatform_Y/2+55+20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([-middlePlatform_X/2+55+20,-bottomPlatform_Y/2+55-20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([-middlePlatform_X/2+55-20,-bottomPlatform_Y/2+55-20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([-middlePlatform_X/2+55-20,-bottomPlatform_Y/2+55+20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+
+
+
+
+
+translate([-middlePlatform_X/2+55,bottomPlatform_Y/2-55,-inlayDepth])
+cube([40,40,thickness], center=true);
+
+translate([-middlePlatform_X/2+55+20,bottomPlatform_Y/2-55+20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([-middlePlatform_X/2+55+20,bottomPlatform_Y/2-55-20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([-middlePlatform_X/2+55-20,bottomPlatform_Y/2-55-20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([-middlePlatform_X/2+55-20,bottomPlatform_Y/2-55+20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+
+
+
+
+translate([middlePlatform_X/2-55,bottomPlatform_Y/2-55,-inlayDepth])
+cube([40,40,thickness], center=true);
+
+translate([middlePlatform_X/2-55+20,bottomPlatform_Y/2-55+20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([middlePlatform_X/2-55+20,bottomPlatform_Y/2-55-20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([middlePlatform_X/2-55-20,bottomPlatform_Y/2-55-20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([middlePlatform_X/2-55-20,bottomPlatform_Y/2-55+20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+
+
+
+
+translate([middlePlatform_X/2-55,-bottomPlatform_Y/2+55,-inlayDepth])
+cube([40,40,thickness], center=true);
+
+translate([middlePlatform_X/2-55+20,-bottomPlatform_Y/2+55+20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([middlePlatform_X/2-55+20,-bottomPlatform_Y/2+55-20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([middlePlatform_X/2-55-20,-bottomPlatform_Y/2+55-20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+translate([middlePlatform_X/2-55-20,-bottomPlatform_Y/2+55+20,-inlayDepth])
+cylinder(h=thickness,r=3,center=true, $fn=100);
+
+
+}
+
+
+
 
 module topPlatform(){
 
 difference(){
 	
 	translate([0,0,0]) //570+200+panelHeight
-			minkowski() {
- 				cube([middlePlatform_X-platformOffset,bottomPlatform_Y-platformOffset,(thickness)], center=true);
- 				cylinder(r=platformOffset,h=(thickness));
-			}
+	minkowski() {		
+        cube([middlePlatform_X-20,bottomPlatform_Y-20,thickness/2], center=true);
+        cylinder(h=thickness/2,r=10,center=false, $fn=100);
+    }
+ 				
 			
-extrudedAluminum();
+extrudedAluminumInset();
 
 inlayHoles();
 
 
 //logo
-	translate([200,-350,7],center=true) //570+200+panelHeight
-	rotate([0,0,90])
-	resize([middlePlatform_X-300,0,0], auto=true)
-		dxf_linear_extrude(file="project_zen_logo.dxf", height=8);
+//	translate([200,-350,7],center=true) //570+200+panelHeight
+//	rotate([0,0,90])
+//	resize([middlePlatform_X-300,0,0], auto=true)
+//		dxf_linear_extrude(file="project_zen_logo.dxf", height=8);
 }
 }
-
 topPlatform();
